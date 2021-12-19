@@ -17,7 +17,7 @@ class MarkTaskCompleteService
     public function markComplete(Task $task): void
     {
         if ($task->getCompletedAt() !== null) {
-            throw new AlreadyCompletedException();
+            throw new AlreadyCompletedException($task->getId().'は既に完了しています');
         }
 
         $task->setCompletedAt(new \DateTimeImmutable());

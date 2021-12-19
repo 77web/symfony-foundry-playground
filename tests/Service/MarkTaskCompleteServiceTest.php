@@ -45,8 +45,11 @@ class MarkTaskCompleteServiceTest extends TestCase
     public function testAlreadyCompleted()
     {
         $this->expectException(AlreadyCompletedException::class);
+        $this->expectExceptionMessage('111は既に完了しています');
 
-        $task = TaskFactory::createOne(['completedAt' => $yesterday = new \DateTimeImmutable('yesterday')])->object();
+        $proxy = TaskFactory::createOne(['completedAt' => $yesterday = new \DateTimeImmutable('yesterday')]);
+        $proxy->forceSet('id', 111);
+        $task = $proxy->object();
 
         $this->emP->persist(Argument::any())->shouldNotBeCalled();
         $this->emP->flush()->shouldNotBeCalled();
