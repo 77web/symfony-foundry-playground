@@ -5,9 +5,12 @@ namespace App\Tests\Controller\TaskController;
 
 use App\Tests\Factory\TaskFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Zenstruck\Foundry\Test\Factories;
 
 class CompletedTest extends WebTestCase
 {
+    use Factories;
+
     public function test()
     {
         // 1件未完了タスクを作る
