@@ -66,7 +66,7 @@ class Task
         return $this->completedAt;
     }
 
-    public function setCompletedAt(\DateTimeImmutable $completedAt): self
+    public function setCompletedAt(?\DateTimeImmutable $completedAt): self
     {
         $this->completedAt = $completedAt;
 
