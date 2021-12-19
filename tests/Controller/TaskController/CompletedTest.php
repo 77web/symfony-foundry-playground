@@ -6,10 +6,11 @@ namespace App\Tests\Controller\TaskController;
 use App\Tests\Factory\TaskFactory;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Zenstruck\Foundry\Test\Factories;
+use Zenstruck\Foundry\Test\ResetDatabase;
 
 class CompletedTest extends WebTestCase
 {
-    use Factories;
+    use Factories, ResetDatabase;
 
     public function test()
     {
