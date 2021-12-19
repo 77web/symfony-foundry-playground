@@ -13,12 +13,13 @@ class CompletedTest extends WebTestCase
 
     public function test()
     {
+        $client = static::createClient();
+
         // 1件未完了タスクを作る
         TaskFactory::createOne();
         // 2件完了済タスクを作る
         TaskFactory::createMany(2, ['completedAt' => new \DateTimeImmutable('yesterday')]);
 
-        $client = static::createClient();
         $crawler = $client->request('GET', '/task/completed');
 
         $this->assertResponseIsSuccessful();
