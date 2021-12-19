@@ -24,6 +24,6 @@ class CompletedTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
         $this->assertTrue($crawler->filter('title')->text() === '完了したタスク');
-        $this->assertTrue($crawler->filter('li')->count() === 2, '完了済の2件のみ');
+        $this->assertEquals(2, $crawler->filter('li')->count(),'完了済の2件のみ');
     }
 }
