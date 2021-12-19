@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use App\Repository\TaskRepository;
+use App\Domain\CompletedTasksFetcherInterface;
+use App\Domain\IncompleteTasksFetcherInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -10,7 +11,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
     public function __construct(
-        private TaskRepository $taskRepository,
+        private CompletedTasksFetcherInterface $completedTasksFetcher,
+        private IncompleteTasksFetcherInterface $incompleteTasksFetcher,
     ) {
     }
 
@@ -18,7 +20,7 @@ class TaskController extends AbstractController
     public function index(): Response
     {
         return $this->render('task/index.html.twig', [
-            'tasks' => $this->taskRepository->findBy(['completedAt' => null]),
+            'tasks' => $this->incompleteTasksFetcher->fetchIncompleteTasks(),
         ]);
     }
 
@@ -26,7 +28,7 @@ class TaskController extends AbstractController
     public function completed(): Response
     {
         return $this->render('task/completed.html.twig', [
-            'tasks' => $this->taskRepository->findBy([]),
+            'tasks' => $this->completedTasksFetcher->fetchCompletedTasks(),
         ]);
     }
 }
